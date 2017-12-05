@@ -1,4 +1,4 @@
-[vue-carousel]: https://vivialex.github.io/demo/carousel/index.html
+[vue-carousel]: https://vivialex.github.io/demo/imageCarousel/index.html
 
 # vue-carousel (mobile)
 
