@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="no"/>
+    <title>Demo</title>
+</head>
+<body>
+    <div id="app">
+        <section class="demo">
+            <h2 class="title">demo1</h2>
+            <div class="container">
+                <carousel :proportion="16/9">
+                    <carousel-item v-for="(img, index) in imgList">
+                        <div class="banner" @click="yelp(index)">
+                            <img :src="img" alt=""/>
+                        </div>
+                    </carousel-item>
+                </carousel>
+            </div>
+        </section>
+
+        <section class="demo">
+            <h2 class="title">demo2</h2>
+            <div class="container">
+                <carousel :proportion="16/9" pagination-type="fraction" :auto-play="false">
+                    <carousel-item v-for="img in imgList">
+                        <div class="banner">
+                            <img :src="img" alt=""/>
+                        </div>
+                    </carousel-item>
+                </carousel>
+            </div>
+        </section>
+
+        <section class="demo">
+            <h2 class="title">demo3</h2>
+            <div class="container">
+                <carousel :proportion="16/9" :pagination-hide="true">
+                    <carousel-item v-for="img in imgList">
+                        <div class="banner">
+                            <img :src="img" alt=""/>
+                        </div>
+                    </carousel-item>
+
+                    <div class="search-bar" slot="other">搜索</div>
+                </carousel>
+            </div>
+        </section>
+
+        <section class="demo">
+            <h2 class="title">demo4</h2>
+            <div class="container">
+                <carousel :height="200" pagination-align="center" :auto-play="false">
+                    <carousel-item>
+                        <div class="icon-container" @click="menu(1)">
+                            <ul class="icon-list">
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-1"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </carousel-item>
+                    <carousel-item>
+                        <div class="icon-container" @click="menu(2)">
+                            <ul class="icon-list">
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                                <li class="item">
+                                    <i class="icon-2"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </carousel-item>
+                </carousel>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

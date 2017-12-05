@@ -1,0 +1,27 @@
+{
+  "name": "vue-carousel",
+  "version": "1.0.0",
+  "description": "The carousel component base on Vue",
+  "main": "src/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivialex/vue-carousel.git"
+  },
+  "keywords": [
+    "vue",
+    "carousel",
+    "vue-carousel"
+  ],
+  "author": "Alex_Zheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vivialex/vue-carousel/issues"
+  },
+  "homepage": "https://github.com/vivialex/vue-carousel#readme"
+}
