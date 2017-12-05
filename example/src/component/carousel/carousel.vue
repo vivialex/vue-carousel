@@ -215,7 +215,7 @@
                 }
 
                 e.preventDefault();
-                e.stopPropagation();
+//                e.stopPropagation();
 
                 this.distance = e.touches[0].clientX - this.startX;
 
