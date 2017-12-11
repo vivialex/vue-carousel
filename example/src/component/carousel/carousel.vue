@@ -225,7 +225,7 @@
                 this.distanceX = finger.clientX - this.startX;
                 this.distanceY = finger.clientY - this.startY;
 
-                if (this.distanceX > this.quickThreshold || (Math.abs(this.distanceX) > Math.abs(this.distanceY))) {
+                if (Math.abs(this.distanceX) > this.quickThreshold || (Math.abs(this.distanceX) > Math.abs(this.distanceY))) {
                     e.preventDefault();
                     e.stopPropagation();
                 }
