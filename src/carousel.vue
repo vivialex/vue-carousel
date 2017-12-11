@@ -110,9 +110,11 @@
                 carouselHeight: null,
 
                 //滑动相关参数
-                distance: 0,
+                distanceX: 0,
+                distanceY: 0,
                 startTime: null,
-                startX: 0
+                startX: 0,
+                startY: 0
             }
         },
         computed: {
@@ -204,8 +206,12 @@
                 this.delayTimer && clearTimeout(this.delayTimer);
                 this.setTranslate();
 
-                this.startX = e.touches[0].clientX;
-                this.distance = 0;
+                let finger = e.touches[0];
+
+                this.startX = finger.clientX;
+                this.startY = finger.clientY;
+                this.distanceX = 0;
+                this.distanceY = 0;
                 this.startTime = new Date().getTime();
             },
             handleTouchMove(e) {
@@ -214,26 +220,31 @@
                     return
                 }
 
-                e.preventDefault();
-                e.stopPropagation();
+                let finger = e.touches[0];
 
-                this.distance = e.touches[0].clientX - this.startX;
+                this.distanceX = finger.clientX - this.startX;
+                this.distanceY = finger.clientY - this.startY;
 
-                if (this.distance > 0) {
-                    this.items[this.prevIndex].slideTo(-this.carouselWidth + this.distance);
+                if (this.distanceX > this.quickThreshold || (Math.abs(this.distanceX) > Math.abs(this.distanceY))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                if (this.distanceX > 0) {
+                    this.items[this.prevIndex].slideTo(-this.carouselWidth + this.distanceX);
 
                     if (this.items.length >= 3) {
-                        this.items[this.nextIndex].slideTo(this.carouselWidth + this.distance);
+                        this.items[this.nextIndex].slideTo(this.carouselWidth + this.distanceX);
                     }
                 } else {
-                    this.items[this.nextIndex].slideTo(this.carouselWidth + this.distance);
+                    this.items[this.nextIndex].slideTo(this.carouselWidth + this.distanceX);
 
                     if (this.items.length >= 3) {
-                        this.items[this.prevIndex].slideTo(-this.carouselWidth + this.distance);
+                        this.items[this.prevIndex].slideTo(-this.carouselWidth + this.distanceX);
                     }
                 }
 
-                this.items[this.currentIndex].slideTo(this.distance);
+                this.items[this.currentIndex].slideTo(this.distanceX);
             },
             handleTouchEnd(e) {
                 //只有page>1时才执行
@@ -241,16 +252,16 @@
                     return;
                 }
 
-                if (this.distance === 0) {
+                if (this.distanceX === 0) {
                     this.setAutoPlay();
                     return;
                 }
 
                 let isQuickAction = new Date().getTime() - this.startTime < 500;
 
-                if ((isQuickAction && this.distance > this.quickThreshold) || this.distance > this.threshold) {
+                if ((isQuickAction && this.distanceX > this.quickThreshold) || this.distanceX > this.threshold) {
                     this.slideTo(this.currentIndex - 1);
-                } else if ((isQuickAction && this.distance < -this.quickThreshold) || this.distance < -this.threshold) {
+                } else if ((isQuickAction && this.distanceX < -this.quickThreshold) || this.distanceX < -this.threshold) {
                     this.slideTo(this.currentIndex + 1);
                 } else {
                     this.slideTo(this.currentIndex);
@@ -269,7 +280,7 @@
 
                 newCurrentIndex = (newCurrentIndex + length) % length;
 
-                if (this.distance > 0) { //向右滑
+                if (this.distanceX > 0) { //向右滑
                     if (newCurrentIndex === this.currentIndex) {
                         this.items[this.prevIndex].slideTo(-this.carouselWidth, this.speed);
                     } else {
@@ -295,7 +306,7 @@
 
             setAutoPlay() {
                 if (this.autoPlay && this.items.length > 1) {
-                    this.distance = 0;
+                    this.distanceX = 0;
                     this.autoPlayTimer && clearTimeout(this.autoPlayTimer);
                     this.autoPlayTimer = setTimeout(() => {
                         this.slideTo(this.currentIndex + 1);
